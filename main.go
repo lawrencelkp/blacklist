@@ -41,7 +41,7 @@ func main() {
 	app := fiber.New()
 
 	// POST /api/blacklist
-	app.Post("/api/blacklist", func(c *fiber.Ctx) error {
+	app.Post("/api/mecCheck", func(c *fiber.Ctx) error {
 		blacklistRequest := new(BlacklistRequest)
 		if err := c.BodyParser(blacklistRequest); err != nil {
 			return c.Status(400).JSON(err.Error())
@@ -56,5 +56,5 @@ func main() {
 		}
 	})
 
-	log.Fatal(app.Listen(":80"))
+	log.Fatal(app.Listen(":8080"))
 }
