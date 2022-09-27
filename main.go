@@ -40,7 +40,13 @@ func contains(s []string, str string) bool {
 func main() {
 	app := fiber.New()
 
-	// POST /api/blacklist
+	app.Static("/web", "dist")
+
+	app.Get("/web/*", func(ctx *fiber.Ctx) error {
+		return ctx.SendFile("./dist/index.html")
+	})
+
+	// POST /api/mecCheck
 	app.Post("/api/mecCheck", func(c *fiber.Ctx) error {
 		blacklistRequest := new(BlacklistRequest)
 		if err := c.BodyParser(blacklistRequest); err != nil {
